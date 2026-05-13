@@ -1,20 +1,26 @@
 # 7h3_w4y_70_b4ld
 
-一款面向 CTF 选手、漏洞研究员、蓝队工程师的 Hexo 主题。
+[English](./README.en.md)
 
-当前版本支持：
+面向 CTF 选手、网络安全从业者与技术写作者的 Hexo 主题。
 
-- 首页 / 文章页 / 归档页 / 分类页 / 标签页
-- profile 区域标签雷达图
-- 标签索引页
+## 特性
+
+- 深色安全风格界面
+- 首页文章卡片
+- 文章页 TOC
+- TOC 当前标题高亮与分级展开
+- 代码复制按钮
+- 长代码块横向滚动优化
+- 标签页索引
+- 侧边栏标签雷达图
 - 友情链接页面
-- 文章目录 TOC
-- 代码块复制按钮
-- 独立 `preview.html` 预览
+- KaTeX 公式渲染
+- 鼠标跟随发光效果
+- 中文化默认界面
+- 独立 `preview.html` 预览页
 
 ## 主题名
-
-本主题名为：
 
 ```text
 7h3_w4y_70_b4ld
@@ -26,58 +32,54 @@
 layout/
 source/
 languages/
+scripts/
+example/
 _config.yml
 package.json
 preview.html
-example/
 ```
 
-## 直接预览
+## 预览
 
-打开：
+直接打开：
 
 ```text
 preview.html
 ```
 
-## 作为 Hexo 主题使用
+## 安装
 
-把本目录放到你的 Hexo 站点中：
+将主题放入 Hexo 站点：
 
 ```text
 themes/7h3_w4y_70_b4ld
 ```
 
-然后在站点根目录 `_config.yml` 里启用：
+然后在站点根目录 `_config.yml` 中启用：
 
 ```yml
 theme: 7h3_w4y_70_b4ld
 ```
 
-执行构建：
+构建：
 
 ```bash
+npx hexo clean
 npx hexo generate
+npx hexo server
 ```
 
-## profile 标签雷达图
+## 推荐页面
 
-- 取消了原来的 `profile.stats`
-- 标签雷达图现在直接显示在 profile 区域
-- 默认取文章数量最多的前 6 个标签
-- 少于 3 个标签时不会绘制雷达图
+### 标签页
 
-## 标签页
-
-标签页不再显示雷达图，改为完整标签索引列表。
-
-创建页面：
+创建：
 
 ```text
 source/tags/index.md
 ```
 
-内容示例：
+内容：
 
 ```yml
 ---
@@ -87,9 +89,117 @@ layout: tags
 ---
 ```
 
-## 文章 front matter 示例
+### 友链页
 
-front matter 仍然用于驱动首页卡片、摘要、TOC 开关等，但文章页不再显示单独的元数据面板。
+创建：
+
+```text
+source/friends/index.md
+```
+
+内容：
+
+```yml
+---
+title: 友情链接
+type: friends
+layout: friends
+links:
+  - name: NightLab
+    url: https://nightlab.example/
+    desc: Web 安全、云原生攻防与漏洞复现
+    tag: Web
+---
+```
+
+## 配置读取优先级
+
+主题支持从站点根目录 `_config.yml` 覆盖主题配置。
+
+优先级：
+
+```text
+站点根目录顶层配置
+> 站点根目录 7h3_w4y_70_b4ld 命名空间
+> 主题自身 _config.yml
+```
+
+支持覆盖的配置段：
+
+```text
+language
+menu
+brand
+hero
+profile
+social
+footer
+ui
+math
+```
+
+### 根配置顶层写法
+
+```yml
+menu:
+  首页: /
+  归档: /archives/
+  标签: /tags/
+  友链: /friends/
+  关于: /about/
+
+brand:
+  name: 7h3_w4y_70_b4ld
+  mark: https://example.com/logo.png
+  motto: 记录题解、漏洞、流量与证据链
+
+profile:
+  title: 攻防研究笔记
+  description: 聚焦 Web、Pwn、Reverse、Crypto、DFIR
+  badges:
+    - Web
+    - Pwn
+    - Reverse
+    - Crypto
+    - DFIR
+```
+
+### 命名空间写法
+
+```yml
+7h3_w4y_70_b4ld:
+  ui:
+    accent: "#5bff98"
+  math:
+    enable: true
+    inline_dollar: true
+```
+
+## 数学公式
+
+默认内置 KaTeX，支持：
+
+- 行内公式：`$...$`、`\(...\)`
+- 块级公式：`$$...$$`、`\[...\]`
+
+主题配置：
+
+```yml
+math:
+  enable: true
+  inline_dollar: true
+```
+
+单篇文章关闭公式：
+
+```yml
+---
+title: 示例
+math: false
+---
+```
+
+## 文章 front matter 示例
 
 ```yml
 ---
@@ -103,47 +213,43 @@ tags:
   - writeup
   - internal-network
 summary: 记录一次从外部 SSRF 探测点到内网 HTTP 服务识别的复现过程。
-challenge: SSRF to Intranet
-platform: Lab / Self-hosted
-difficulty: Medium
-warning: 文章中的目标、域名与数据均为实验环境样本。
+warning: 文中的目标、域名与数据均为实验环境样本。
+toc: true
+math: false
 ---
 ```
 
-对应示例文件：
+## 页面行为
+
+- 文章页默认隐藏侧边栏 profile
+- TOC 支持 H1 / H2 / H3
+- TOC 点击跳转与滚动高亮
+- 代码块固定行号宽度
+- 长代码仅在代码块内部滚动
+- 归档页标题与摘要自动截断，避免溢出
+- `brand.mark` 可直接使用图片地址
+
+## 示例内容
+
+可参考：
 
 ```text
 example/source/_posts/welcome-to-7h3_w4y_70_b4ld.md
+example/source/tags/index.md
+example/source/friends/index.md
+example/source/about/index.md
 ```
 
-## 友情链接
+## 开发
 
-创建页面：
+本地预览可直接将主题复制到你的 Hexo 站点中，然后执行：
 
-```text
-source/friends/index.md
+```bash
+npx hexo clean
+npx hexo g
+npx hexo s
 ```
 
-示例：
+## License
 
-```yml
----
-title: 友情链接
-layout: friends
-links:
-  - name: g0ubu1i's Blog
-    url: https://blog.goubuli.online
-    desc: CTF学习笔记
----
-```
-
-## TOC 与代码复制
-
-- 文章目录默认自动开启
-- 如果某篇文章不想显示 TOC，可在 front matter 里写：
-
-```yml
-toc: false
-```
-
-- 代码块复制按钮会自动注入到文章页代码块右上角
+MIT
