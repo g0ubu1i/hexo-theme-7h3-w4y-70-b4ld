@@ -1,0 +1,16 @@
+{
+  "name": "hexo-theme-7h3-w4y-70-b4ld",
+  "version": "0.3.0",
+  "description": "A Hexo theme for CTF players and security practitioners.",
+  "license": "MIT",
+  "keywords": [
+    "hexo",
+    "hexo-theme",
+    "ctf",
+    "security",
+    "blog"
+  ],
+  "engines": {
+    "hexo": ">=6.0.0"
+  }
+}

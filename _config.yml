@@ -1,0 +1,48 @@
+language: zh-CN
+
+menu:
+  首页: /
+  归档: /archives/
+  标签: /tags/
+  友链: /friends/
+  关于: /about/
+
+brand:
+  name: 7h3_w4y_70_b4ld
+  mark: 7w
+  motto: 记录题解、漏洞、流量与证据链。
+
+hero:
+  heading: 面向 CTF 选手与网络安全从业者的技术博客
+  subheading: 适合沉淀题解、漏洞分析、逆向笔记、取证报告、蓝队复盘与工具研发日志。
+  terminal:
+    - "[+] loading writeups..."
+    - "[+] syncing web / pwn / reverse / crypto / dfir"
+    - "[+] ready for post-mortem and exploit notes"
+
+profile:
+  title: 攻防研究笔记
+  description: 聚焦 Web、Pwn、Reverse、Crypto、DFIR 与实战安全研发。
+  badges:
+    - Web
+    - Pwn
+    - Reverse
+    - Crypto
+    - DFIR
+
+social:
+  GitHub: https://github.com/
+  X: https://x.com/
+  邮箱: mailto:hello@example.com
+
+footer:
+  text: "7h3_w4y_70_b4ld / Hexo 主题"
+
+ui:
+  accent: "#5bff98"
+  accent_secondary: "#66d9ff"
+  danger: "#ff6b81"
+
+math:
+  enable: true
+  inline_dollar: true

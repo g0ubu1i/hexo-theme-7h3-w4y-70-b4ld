@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>7h3_w4y_70_b4ld Preview</title>
+    <link rel="stylesheet" href="./source/css/style.css">
+  </head>
+  <body>
+    <div class="grid-mask"></div>
+    <div class="scanline"></div>
+
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="#">
+          <span class="brand-mark">7w</span>
+          <div>
+            <strong>7h3_w4y_70_b4ld</strong>
+            <small>记录题解、漏洞、流量与证据链。</small>
+          </div>
+        </a>
+        <button class="nav-toggle" type="button">导航</button>
+        <nav class="nav-menu">
+          <a href="#">首页</a>
+          <a href="#">归档</a>
+          <a href="#">标签</a>
+          <a href="#">友链</a>
+          <a href="#">关于</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-shell">
+      <div class="content-shell">
+        <section class="content-panel" style="padding: 28px;">
+          <section class="hero-panel">
+            <div class="hero-copy">
+              <p class="eyebrow">HEXO / CTF / SECURITY</p>
+              <h1>面向 CTF 选手与网络安全从业者的技术博客</h1>
+              <p class="hero-subheading">
+                这一版移除了 profile 中的 stats，并把标签雷达图放进了 profile 区域。
+              </p>
+              <div class="hero-actions">
+                <a class="btn-primary" href="#">浏览归档</a>
+                <a class="btn-secondary" href="#">查看标签</a>
+              </div>
+            </div>
+            <div class="terminal-panel">
+              <div class="terminal-bar">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-line">$ [+] profile stats removed</div>
+                <div class="terminal-line">$ [+] tag radar moved to sidebar</div>
+                <div class="terminal-line">$ [+] toc / copy button preserved</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-head">
+            <div>
+              <p class="eyebrow">LATEST LOGS</p>
+              <h2>最新文章</h2>
+            </div>
+            <span class="status-chip">实时索引</span>
+          </section>
+
+          <div class="post-grid">
+            <article class="post-card">
+              <div class="card-meta">
+                <span>2026-05-12</span>
+                <span>Web</span>
+              </div>
+              <h3><a href="#">从一条异常回显定位到完整攻击面</a></h3>
+              <p>首页卡片仍会读取 summary、challenge、difficulty、platform 等 front matter 字段。</p>
+              <div class="card-signal-row">
+                <span class="signal-pill">Medium</span>
+                <span class="signal-pill">Lab / Self-hosted</span>
+                <span class="signal-pill">SSRF to Intranet</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag-pill"># ssrf</span>
+                <span class="tag-pill"># writeup</span>
+                <span class="tag-pill"># internal-network</span>
+              </div>
+            </article>
+
+            <article class="post-card">
+              <div class="card-meta">
+                <span>2026-05-09</span>
+                <span>Reverse</span>
+              </div>
+              <h3><a href="#">样本字符串解密流程逆向与 IDA 标注规范</a></h3>
+              <p>文章页保留 TOC 和代码复制按钮，但不再展示元数据面板。</p>
+              <div class="card-signal-row">
+                <span class="signal-pill">Hard</span>
+                <span class="signal-pill">Malware Lab</span>
+              </div>
+              <div class="tag-row">
+                <span class="tag-pill"># ida</span>
+                <span class="tag-pill"># malware</span>
+              </div>
+            </article>
+          </div>
+
+          <section class="section-head" style="margin-top: 32px;">
+            <div>
+              <p class="eyebrow">TAG INDEX</p>
+              <h2>标签索引预览</h2>
+            </div>
+            <span class="status-chip">INDEX</span>
+          </section>
+
+          <div class="tag-directory">
+            <a class="tag-directory-item" href="#">
+              <span class="tag-directory-rank">1</span>
+              <div class="tag-directory-body">
+                <strong># web</strong>
+                <small>32 篇文章</small>
+              </div>
+            </a>
+            <a class="tag-directory-item" href="#">
+              <span class="tag-directory-rank">2</span>
+              <div class="tag-directory-body">
+                <strong># reverse</strong>
+                <small>25 篇文章</small>
+              </div>
+            </a>
+            <a class="tag-directory-item" href="#">
+              <span class="tag-directory-rank">3</span>
+              <div class="tag-directory-body">
+                <strong># pwn</strong>
+                <small>18 篇文章</small>
+              </div>
+            </a>
+            <a class="tag-directory-item" href="#">
+              <span class="tag-directory-rank">4</span>
+              <div class="tag-directory-body">
+                <strong># ssti</strong>
+                <small>15 篇文章</small>
+              </div>
+            </a>
+          </div>
+
+          <section class="section-head" style="margin-top: 32px;">
+            <div>
+              <p class="eyebrow">FRIEND LINKS</p>
+              <h2>友情链接预览</h2>
+            </div>
+            <span class="status-chip">3 ONLINE</span>
+          </section>
+
+          <div class="friend-grid">
+            <a class="friend-card" href="#">
+              <div class="friend-avatar friend-avatar-fallback"><span>NL</span></div>
+              <div class="friend-body">
+                <div class="friend-head">
+                  <h3>NightLab</h3>
+                  <span class="tag-pill">Web</span>
+                </div>
+                <p>Web 安全、云原生攻防与漏洞复现。</p>
+                <small>https://nightlab.example/</small>
+              </div>
+            </a>
+            <a class="friend-card" href="#">
+              <div class="friend-avatar friend-avatar-fallback"><span>HS</span></div>
+              <div class="friend-body">
+                <div class="friend-head">
+                  <h3>Heap Spray Notes</h3>
+                  <span class="tag-pill">Pwn</span>
+                </div>
+                <p>专注于 Pwn、glibc 与利用链分析。</p>
+                <small>https://heapspray.example/</small>
+              </div>
+            </a>
+            <a class="friend-card" href="#">
+              <div class="friend-avatar friend-avatar-fallback"><span>RC</span></div>
+              <div class="friend-body">
+                <div class="friend-head">
+                  <h3>ReClassified</h3>
+                  <span class="tag-pill">Reverse</span>
+                </div>
+                <p>恶意代码分析、逆向与样本拆解。</p>
+                <small>https://reclassified.example/</small>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="widget profile-widget">
+            <p class="eyebrow">OPERATOR PROFILE</p>
+            <h3>攻防研究笔记</h3>
+            <p>聚焦 Web、Pwn、Reverse、Crypto、DFIR 与实战安全研发。</p>
+            <div class="badge-cloud">
+              <span>Web</span>
+              <span>Pwn</span>
+              <span>Reverse</span>
+              <span>Crypto</span>
+              <span>DFIR</span>
+            </div>
+
+            <div class="profile-radar-shell">
+              <div class="profile-radar-head">
+                <p class="eyebrow">TAG RADAR</p>
+                <h4>标签雷达</h4>
+              </div>
+              <svg class="profile-radar-svg" viewBox="0 0 280 264" role="img" aria-label="标签雷达图">
+                <polygon class="tag-radar-grid" points="140,46 214.48,89 214.48,175 140,218 65.52,175 65.52,89"></polygon>
+                <polygon class="tag-radar-grid" points="140,63.2 199.58,97.6 199.58,166.4 140,200.8 80.42,166.4 80.42,97.6"></polygon>
+                <polygon class="tag-radar-grid" points="140,80.4 184.69,106.2 184.69,157.8 140,183.6 95.31,157.8 95.31,106.2"></polygon>
+                <polygon class="tag-radar-grid" points="140,97.6 169.79,114.8 169.79,149.2 140,166.4 110.21,149.2 110.21,114.8"></polygon>
+                <polygon class="tag-radar-grid" points="140,114.8 154.9,123.4 154.9,140.6 140,149.2 125.1,140.6 125.1,123.4"></polygon>
+
+                <line class="tag-radar-axis" x1="140" y1="132" x2="140" y2="46"></line>
+                <line class="tag-radar-axis" x1="140" y1="132" x2="214.48" y2="89"></line>
+                <line class="tag-radar-axis" x1="140" y1="132" x2="214.48" y2="175"></line>
+                <line class="tag-radar-axis" x1="140" y1="132" x2="140" y2="218"></line>
+                <line class="tag-radar-axis" x1="140" y1="132" x2="65.52" y2="175"></line>
+                <line class="tag-radar-axis" x1="140" y1="132" x2="65.52" y2="89"></line>
+
+                <polygon class="tag-radar-data-fill" points="140,46 196.62,99.35 177.24,153.5 140,164.25 116.16,145.8 121.39,121.3"></polygon>
+                <polyline class="tag-radar-data-line" points="140,46 196.62,99.35 177.24,153.5 140,164.25 116.16,145.8 121.39,121.3 140,46"></polyline>
+
+                <circle class="tag-radar-dot" cx="140" cy="46" r="3.5"></circle>
+                <circle class="tag-radar-dot" cx="196.62" cy="99.35" r="3.5"></circle>
+                <circle class="tag-radar-dot" cx="177.24" cy="153.5" r="3.5"></circle>
+                <circle class="tag-radar-dot" cx="140" cy="164.25" r="3.5"></circle>
+                <circle class="tag-radar-dot" cx="116.16" cy="145.8" r="3.5"></circle>
+                <circle class="tag-radar-dot" cx="121.39" cy="121.3" r="3.5"></circle>
+
+                <text class="profile-radar-label" x="140" y="28" text-anchor="middle">
+                  <tspan x="140" dy="0"># web</tspan>
+                  <tspan x="140" dy="14">32</tspan>
+                </text>
+                <text class="profile-radar-label" x="230" y="86" text-anchor="middle">
+                  <tspan x="230" dy="0"># rev</tspan>
+                  <tspan x="230" dy="14">25</tspan>
+                </text>
+                <text class="profile-radar-label" x="230" y="192" text-anchor="middle">
+                  <tspan x="230" dy="0"># pwn</tspan>
+                  <tspan x="230" dy="14">18</tspan>
+                </text>
+                <text class="profile-radar-label" x="140" y="244" text-anchor="middle">
+                  <tspan x="140" dy="0"># ssti</tspan>
+                  <tspan x="140" dy="14">15</tspan>
+                </text>
+                <text class="profile-radar-label" x="50" y="192" text-anchor="middle">
+                  <tspan x="50" dy="0"># cry</tspan>
+                  <tspan x="50" dy="14">9</tspan>
+                </text>
+                <text class="profile-radar-label" x="50" y="86" text-anchor="middle">
+                  <tspan x="50" dy="0"># dfir</tspan>
+                  <tspan x="50" dy="14">4</tspan>
+                </text>
+              </svg>
+              <div class="profile-radar-links">
+                <a href="#"># web <small>32</small></a>
+                <a href="#"># reverse <small>25</small></a>
+                <a href="#"># pwn <small>18</small></a>
+                <a href="#"># ssti <small>15</small></a>
+              </div>
+            </div>
+          </section>
+
+          <section class="widget">
+            <p class="eyebrow">LINKS</p>
+            <div class="link-list">
+              <a href="#">GitHub</a>
+              <a href="#">X</a>
+              <a href="#">邮箱</a>
+            </div>
+          </section>
+
+          <section class="widget">
+            <p class="eyebrow">SEARCH TARGETS</p>
+            <ul class="plain-list">
+              <li>题解归档</li>
+              <li>漏洞分析</li>
+              <li>蓝队复盘</li>
+              <li>工具开发笔记</li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <span>7h3_w4y_70_b4ld / Hexo 主题</span>
+        <span>为 CTF / 网络安全研究而设计</span>
+      </div>
+    </footer>
+
+    <script src="./source/js/main.js"></script>
+  </body>
+</html>

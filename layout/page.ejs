@@ -1,0 +1,107 @@
+<%
+const tagIndexPath = ((config.tag_dir || 'tags').replace(/\/+$/, '')) + '/index.html';
+const friendsIndexPath = 'friends/index.html';
+const isTagsPage = page.type === 'tags' || page.layout === 'tags' || page.path === tagIndexPath;
+const isFriendsPage = page.type === 'friends' || page.layout === 'friends' || page.path === friendsIndexPath;
+const tagItems = site.tags && site.tags.toArray ? site.tags.toArray().sort(function(a, b) { return b.length - a.length; }) : [];
+const links = Array.isArray(page.links) ? page.links : [];
+%>
+<% if (isTagsPage) { %>
+  <article class="article-shell">
+    <header class="article-header">
+      <p class="eyebrow">TAG INDEX</p>
+      <h1><%= page.title || '标签' %></h1>
+      <div class="article-meta">
+        <span><%= tagItems.length %> 个标签</span>
+        <span>按文章数量排序</span>
+      </div>
+    </header>
+
+    <% if (page.content && page.content.trim()) { %>
+      <section class="article-body friend-intro">
+        <%- page.content %>
+      </section>
+    <% } %>
+
+    <% if (tagItems.length) { %>
+      <div class="tag-directory">
+        <% tagItems.forEach(function(tag, index) { %>
+          <a class="tag-directory-item" href="<%- url_for(tag.path) %>">
+            <span class="tag-directory-rank"><%= index + 1 %></span>
+            <div class="tag-directory-body">
+              <strong># <%= tag.name %></strong>
+              <small><%= tag.length %> 篇文章</small>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <p>当前还没有标签数据。先给文章添加 `tags` 后再查看这里。</p>
+      </div>
+    <% } %>
+  </article>
+<% } else if (isFriendsPage) { %>
+  <article class="article-shell">
+    <header class="article-header">
+      <p class="eyebrow">TRUSTED NODES</p>
+      <h1><%= page.title || '友情链接' %></h1>
+      <div class="article-meta">
+        <span><%= links.length %> 个友链</span>
+        <span>通过 Markdown front matter 管理</span>
+      </div>
+    </header>
+
+    <% if (page.content && page.content.trim()) { %>
+      <section class="article-body friend-intro">
+        <%- page.content %>
+      </section>
+    <% } %>
+
+    <section class="section-head">
+      <div>
+        <p class="eyebrow">FRIEND LINKS</p>
+        <h2>友情链接</h2>
+      </div>
+      <span class="status-chip"><%= links.length %> ONLINE</span>
+    </section>
+
+    <% if (links.length) { %>
+      <div class="friend-grid">
+        <% links.forEach(function(link) { %>
+          <a class="friend-card" href="<%= link.url %>" target="_blank" rel="noopener noreferrer">
+            <% if (link.avatar) { %>
+              <img class="friend-avatar" src="<%= link.avatar %>" alt="<%= link.name %>">
+            <% } else { %>
+              <div class="friend-avatar friend-avatar-fallback"><span><%= (link.name || '?').slice(0, 2).toUpperCase() %></span></div>
+            <% } %>
+            <div class="friend-body">
+              <div class="friend-head">
+                <h3><%= link.name %></h3>
+                <% if (link.tag) { %>
+                  <span class="tag-pill"><%= link.tag %></span>
+                <% } %>
+              </div>
+              <p><%= link.desc || link.description || '安全研究 / CTF / 攻防复盘' %></p>
+              <small><%= link.url %></small>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state">
+        <p>当前没有配置友链。请在 `source/friends/index.md` 的 front matter 里添加 `links` 数组。</p>
+      </div>
+    <% } %>
+  </article>
+<% } else { %>
+  <article class="article-shell">
+    <header class="article-header">
+      <p class="eyebrow">STATIC PAGE</p>
+      <h1><%= page.title %></h1>
+    </header>
+    <section class="article-body">
+      <%- page.content %>
+    </section>
+  </article>
+<% } %>

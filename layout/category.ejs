@@ -1,0 +1,17 @@
+<%
+const posts = page.posts && page.posts.toArray ? page.posts.toArray() : (page.posts && page.posts.data ? page.posts.data : []);
+const categoryName = page.category && page.category.name ? page.category.name : (page.category || page.title || '分类');
+%>
+<section class="section-head">
+  <div>
+    <p class="eyebrow">CATEGORY VIEW</p>
+    <h1><%= categoryName %></h1>
+  </div>
+  <span class="status-chip"><%= posts.length %> 篇匹配</span>
+</section>
+
+<div class="post-grid">
+  <% posts.forEach(function(post) { %>
+    <%- partial('partial/post-card', { post: post }) %>
+  <% }) %>
+</div>

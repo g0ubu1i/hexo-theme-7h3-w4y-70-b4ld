@@ -1,0 +1,45 @@
+<%
+const brand = theme_config('brand', {}) || {};
+const profile = theme_config('profile', {}) || {};
+const ui = theme_config('ui', {}) || {};
+const themeMath = theme_config('math', {}) || {};
+const mathEnabled = typeof page.math === 'boolean' ? page.math : themeMath.enable !== false;
+const siteTitle = brand.name || config.title || '7h3_w4y_70_b4ld';
+const pageTitle = page.title ? page.title + ' | ' + siteTitle : siteTitle;
+const metaDescription = page.description || page.summary || config.description || profile.description || '';
+const tagList = page.tags && page.tags.toArray ? page.tags.toArray() : (Array.isArray(page.tags) ? page.tags : []);
+const pageKeywords = page.keywords || (tagList.length ? tagList.map(function(tag) { return tag.name || tag; }).join(', ') : '');
+const metaKeywords = pageKeywords || config.keywords || '';
+const favicon = config.favicon || page.icon || page.cover || '';
+const metaImage = page.cover || favicon || '';
+const canonicalUrl = page.permalink || config.url || '/';
+const metaType = page.layout === 'post' || page.type === 'post' ? 'article' : 'website';
+%>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= pageTitle %></title>
+<meta name="description" content="<%= metaDescription %>">
+<% if (metaKeywords) { %><meta name="keywords" content="<%= Array.isArray(metaKeywords) ? metaKeywords.join(', ') : metaKeywords %>"><% } %>
+<% if (config.author) { %><meta name="author" content="<%= config.author %>"><% } %>
+<meta name="theme-color" content="<%= ui.accent || '#5bff98' %>">
+<meta property="og:title" content="<%= pageTitle %>">
+<meta property="og:description" content="<%= metaDescription %>">
+<meta property="og:type" content="<%= metaType %>">
+<meta property="og:url" content="<%= canonicalUrl %>">
+<meta property="og:site_name" content="<%= siteTitle %>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<%= pageTitle %>">
+<meta name="twitter:description" content="<%= metaDescription %>">
+<% if (metaImage) { %>
+  <meta property="og:image" content="<%= metaImage %>">
+  <meta name="twitter:image" content="<%= metaImage %>">
+<% } %>
+<% if (favicon) { %>
+  <link rel="icon" href="<%= favicon %>">
+  <link rel="shortcut icon" href="<%= favicon %>">
+  <link rel="apple-touch-icon" href="<%= favicon %>">
+<% } %>
+<link rel="stylesheet" href="<%- url_for('/css/style.css') %>">
+<% if (mathEnabled) { %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<% } %>

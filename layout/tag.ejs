@@ -1,0 +1,17 @@
+<%
+const posts = page.posts && page.posts.toArray ? page.posts.toArray() : (page.posts && page.posts.data ? page.posts.data : []);
+const tagName = page.tag && page.tag.name ? page.tag.name : (page.tag || page.title || '标签');
+%>
+<section class="section-head">
+  <div>
+    <p class="eyebrow">TAG VIEW</p>
+    <h1># <%= tagName %></h1>
+  </div>
+  <span class="status-chip"><%= posts.length %> 篇匹配</span>
+</section>
+
+<div class="post-grid">
+  <% posts.forEach(function(post) { %>
+    <%- partial('partial/post-card', { post: post }) %>
+  <% }) %>
+</div>

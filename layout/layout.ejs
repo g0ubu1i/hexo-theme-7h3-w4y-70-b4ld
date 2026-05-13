@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="<%= theme_config('language', config.language || 'zh-CN') %>">
+  <head>
+    <%- partial('partial/head') %>
+  </head>
+  <body>
+    <div class="grid-mask"></div>
+    <div class="scanline"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <%- partial('partial/header') %>
+    <%
+    const isPostPage = page.layout === 'post' || page.type === 'post';
+    %>
+    <main class="site-shell">
+      <div class="content-shell <%= isPostPage ? 'content-shell-post' : '' %>">
+        <section class="content-panel">
+          <%- body %>
+        </section>
+        <% if (!isPostPage) { %>
+          <aside class="side-panel">
+            <%- partial('partial/sidebar') %>
+          </aside>
+        <% } %>
+      </div>
+    </main>
+    <%- partial('partial/footer') %>
+    <%
+    const themeMath = theme_config('math', {});
+    const themeUi = theme_config('ui', {});
+    const mathEnabled = typeof page.math === 'boolean' ? page.math : themeMath.enable !== false;
+    const mathInlineDollar = typeof page.math_inline_dollar === 'boolean'
+      ? page.math_inline_dollar
+      : themeMath.inline_dollar !== false;
+    %>
+    <script>
+      window.__THEME_ACCENT__ = "<%= themeUi.accent || '#5bff98' %>";
+      window.__THEME_MATH__ = {
+        enable: <%= mathEnabled ? 'true' : 'false' %>,
+        inlineDollar: <%= mathInlineDollar ? 'true' : 'false' %>
+      };
+    </script>
+    <% if (mathEnabled) { %>
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <% } %>
+    <script defer src="<%- url_for('/js/main.js') %>"></script>
+  </body>
+</html>

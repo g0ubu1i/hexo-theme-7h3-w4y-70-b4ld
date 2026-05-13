@@ -1,0 +1,37 @@
+<%
+const tagItems = site.tags && site.tags.toArray ? site.tags.toArray().sort(function(a, b) { return b.length - a.length; }) : [];
+%>
+<article class="article-shell">
+  <header class="article-header">
+    <p class="eyebrow">TAG INDEX</p>
+    <h1><%= page.title || '标签' %></h1>
+    <div class="article-meta">
+      <span><%= tagItems.length %> 个标签</span>
+      <span>按文章数量排序</span>
+    </div>
+  </header>
+
+  <% if (page.content && page.content.trim()) { %>
+    <section class="article-body friend-intro">
+      <%- page.content %>
+    </section>
+  <% } %>
+
+  <% if (tagItems.length) { %>
+    <div class="tag-directory">
+      <% tagItems.forEach(function(tag, index) { %>
+        <a class="tag-directory-item" href="<%- url_for(tag.path) %>">
+          <span class="tag-directory-rank"><%= index + 1 %></span>
+          <div class="tag-directory-body">
+            <strong># <%= tag.name %></strong>
+            <small><%= tag.length %> 篇文章</small>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="empty-state">
+      <p>当前还没有标签数据。先写几篇文章并设置 `tags` front matter 即可。</p>
+    </div>
+  <% } %>
+</article>

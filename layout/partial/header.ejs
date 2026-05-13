@@ -1,0 +1,31 @@
+<%
+const menu = theme_config('menu', {}) || {};
+const brand = theme_config('brand', {}) || {};
+const brandMark = brand.mark || '';
+const brandMarkImage = /^(https?:)?\/\//.test(brandMark) || brandMark.indexOf('/') !== -1 || /\.(png|jpe?g|gif|svg|webp|ico)$/i.test(brandMark)
+  ? brandMark
+  : (config.favicon || '');
+%>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="<%- url_for('/') %>">
+      <span class="brand-mark">
+        <% if (brandMarkImage) { %>
+          <img src="<%= brandMarkImage %>" alt="<%= brand.name || config.title || 'logo' %>">
+        <% } else { %>
+          <span><%= brandMark || '7w' %></span>
+        <% } %>
+      </span>
+      <div>
+        <strong><%= brand.name || config.title || '7h3_w4y_70_b4ld' %></strong>
+        <small><%= brand.motto || '安全研究日志' %></small>
+      </div>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="切换导航">导航</button>
+    <nav class="nav-menu">
+      <% Object.keys(menu).forEach(function(label) { %>
+        <a href="<%- url_for(menu[label]) %>"><%= label %></a>
+      <% }) %>
+    </nav>
+  </div>
+</header>

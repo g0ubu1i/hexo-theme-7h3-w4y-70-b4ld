@@ -1,0 +1,51 @@
+<%
+const posts = page.posts && page.posts.toArray ? page.posts.toArray() : (page.posts && page.posts.data ? page.posts.data : []);
+const hero = theme_config('hero', {}) || {};
+const terminal = hero.terminal || [];
+%>
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">HEXO / CTF / SECURITY</p>
+    <h1><%= hero.heading || '安全研究笔记' %></h1>
+    <p class="hero-subheading"><%= hero.subheading || '记录排障、解题、利用链与应急复盘。' %></p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="<%- url_for('/archives/') %>">浏览归档</a>
+      <a class="btn-secondary" href="<%- url_for('/tags/') %>">查看标签</a>
+    </div>
+  </div>
+  <div class="terminal-panel">
+    <div class="terminal-bar">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="terminal-body">
+      <% terminal.forEach(function(line) { %>
+        <div class="terminal-line">$ <%= line %></div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section-head">
+  <div>
+    <p class="eyebrow">LATEST LOGS</p>
+    <h2>最新文章</h2>
+  </div>
+  <span class="status-chip">实时索引</span>
+</section>
+
+<div class="post-grid">
+  <% posts.forEach(function(post) { %>
+    <%- partial('partial/post-card', { post: post }) %>
+  <% }) %>
+</div>
+
+<% if (page.total && page.total > 1) { %>
+  <nav class="pager">
+    <% if (page.prev) { %>
+      <a href="<%- url_for(page.prev_link) %>">&lt;- 较新文章</a>
+    <% } %>
+    <% if (page.next) { %>
+      <a href="<%- url_for(page.next_link) %>">较早文章 -&gt;</a>
+    <% } %>
+  </nav>
+<% } %>

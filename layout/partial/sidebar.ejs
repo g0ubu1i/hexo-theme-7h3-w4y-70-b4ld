@@ -1,0 +1,106 @@
+<%
+const profile = theme_config('profile', {}) || {};
+const social = theme_config('social', {}) || {};
+const badges = profile.badges || [];
+const tagItems = site.tags && site.tags.toArray ? site.tags.toArray().sort(function(a, b) { return b.length - a.length; }) : [];
+const radarItems = tagItems.slice(0, 6);
+const totalAxes = radarItems.length;
+const cx = 140;
+const cy = 132;
+const radius = 86;
+const maxCount = radarItems.length ? Math.max.apply(null, radarItems.map(function(item) { return item.length; })) : 1;
+
+function axisAngle(index) {
+  return (-Math.PI / 2) + ((Math.PI * 2) / Math.max(totalAxes, 1)) * index;
+}
+
+function pointFor(index, ratio, extra) {
+  const angle = axisAngle(index);
+  const r = radius * ratio + (extra || 0);
+  return {
+    x: cx + Math.cos(angle) * r,
+    y: cy + Math.sin(angle) * r
+  };
+}
+
+function pointText(point) {
+  return point.x.toFixed(2) + ',' + point.y.toFixed(2);
+}
+
+function polygonFor(level) {
+  return radarItems.map(function(_, index) {
+    return pointText(pointFor(index, level, 0));
+  }).join(' ');
+}
+
+const gridLevels = [0.2, 0.4, 0.6, 0.8, 1];
+const dataPolygon = radarItems.map(function(item, index) {
+  return pointText(pointFor(index, item.length / maxCount, 0));
+}).join(' ');
+%>
+<section class="widget profile-widget">
+  <p class="eyebrow">OPERATOR PROFILE</p>
+  <h3><%= profile.title || '安全研究笔记' %></h3>
+  <p><%= profile.description || '' %></p>
+  <div class="badge-cloud">
+    <% badges.forEach(function(item) { %>
+      <span><%= item %></span>
+    <% }) %>
+  </div>
+
+  <% if (Object.keys(social).length) { %>
+    <div class="profile-links">
+      <p class="eyebrow">LINKS</p>
+      <div class="link-list">
+        <% Object.keys(social).forEach(function(label) { %>
+          <a href="<%= social[label] %>" target="_blank" rel="noopener noreferrer"><%= label %></a>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="profile-radar-shell">
+    <div class="profile-radar-head">
+      <p class="eyebrow">TAG RADAR</p>
+      <h4>标签雷达</h4>
+    </div>
+
+    <% if (radarItems.length >= 3) { %>
+      <svg class="profile-radar-svg" viewBox="0 0 280 264" role="img" aria-label="标签雷达图">
+        <% gridLevels.forEach(function(level) { %>
+          <polygon class="tag-radar-grid" points="<%= polygonFor(level) %>"></polygon>
+        <% }) %>
+
+        <% radarItems.forEach(function(item, index) {
+          const axisPoint = pointFor(index, 1, 0);
+          const labelPoint = pointFor(index, 1, 18);
+        %>
+          <line class="tag-radar-axis" x1="<%= cx %>" y1="<%= cy %>" x2="<%= axisPoint.x.toFixed(2) %>" y2="<%= axisPoint.y.toFixed(2) %>"></line>
+          <text class="profile-radar-label" x="<%= labelPoint.x.toFixed(2) %>" y="<%= labelPoint.y.toFixed(2) %>" text-anchor="middle">
+            <tspan x="<%= labelPoint.x.toFixed(2) %>" dy="0"># <%= item.name %></tspan>
+            <tspan x="<%= labelPoint.x.toFixed(2) %>" dy="14"><%= item.length %></tspan>
+          </text>
+        <% }) %>
+
+        <polygon class="tag-radar-data-fill" points="<%= dataPolygon %>"></polygon>
+        <polyline class="tag-radar-data-line" points="<%= dataPolygon %> <%= dataPolygon.split(' ')[0] %>"></polyline>
+
+        <% radarItems.forEach(function(item, index) {
+          const dataPoint = pointFor(index, item.length / maxCount, 0);
+        %>
+          <circle class="tag-radar-dot" cx="<%= dataPoint.x.toFixed(2) %>" cy="<%= dataPoint.y.toFixed(2) %>" r="3.5"></circle>
+        <% }) %>
+      </svg>
+
+      <div class="profile-radar-links">
+        <% radarItems.slice(0, 4).forEach(function(tag) { %>
+          <a href="<%- url_for(tag.path) %>"># <%= tag.name %> <small><%= tag.length %></small></a>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty-state compact">
+        <p>至少需要 3 个标签后才能显示雷达图。</p>
+      </div>
+    <% } %>
+  </div>
+</section>

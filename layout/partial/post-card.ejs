@@ -1,0 +1,30 @@
+<%
+const categoryList = post.categories && post.categories.toArray ? post.categories.toArray() : (Array.isArray(post.categories) ? post.categories : []);
+const tagList = post.tags && post.tags.toArray ? post.tags.toArray() : (Array.isArray(post.tags) ? post.tags : []);
+const cardSummary = post.summary || post.description || strip_html(post.excerpt || post.content).slice(0, 150);
+const cardSignals = [post.difficulty, post.platform, post.challenge].filter(Boolean);
+%>
+<article class="post-card">
+  <div class="card-meta">
+    <span><%= date(post.date, 'YYYY-MM-DD') %></span>
+    <% if (categoryList.length) { %>
+      <span><%= categoryList[0].name %></span>
+    <% } %>
+  </div>
+  <h3><a href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
+  <p><%= cardSummary %></p>
+  <% if (cardSignals.length) { %>
+    <div class="card-signal-row">
+      <% cardSignals.forEach(function(item) { %>
+        <span class="signal-pill"><%= item %></span>
+      <% }) %>
+    </div>
+  <% } %>
+  <% if (tagList.length) { %>
+    <div class="tag-row">
+      <% tagList.slice(0, 3).forEach(function(tag) { %>
+        <a class="tag-pill" href="<%- url_for(tag.path) %>"># <%= tag.name %></a>
+      <% }) %>
+    </div>
+  <% } %>
+</article>

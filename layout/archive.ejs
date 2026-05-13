@@ -1,0 +1,29 @@
+<%
+const posts = page.posts && page.posts.toArray ? page.posts.toArray() : (page.posts && page.posts.data ? page.posts.data : []);
+const archivePreviewLimit = 96;
+%>
+<section class="section-head">
+  <div>
+    <p class="eyebrow">ARCHIVE INDEX</p>
+    <h1><%= page.title || '归档' %></h1>
+  </div>
+  <span class="status-chip"><%= posts.length %> 篇文章</span>
+</section>
+
+<div class="timeline">
+  <% posts.forEach(function(post) { %>
+    <%
+    const archiveSummaryRaw = strip_html(post.summary || post.excerpt || post.content || '').replace(/\s+/g, ' ').trim();
+    const archiveSummary = archiveSummaryRaw.length > archivePreviewLimit
+      ? archiveSummaryRaw.slice(0, archivePreviewLimit) + '...'
+      : archiveSummaryRaw;
+    %>
+    <article class="timeline-item">
+      <div class="timeline-date"><%= date(post.date, 'YYYY.MM.DD') %></div>
+      <div class="timeline-card">
+        <h3><a href="<%- url_for(post.path) %>"><%= post.title %></a></h3>
+        <p><%= archiveSummary %></p>
+      </div>
+    </article>
+  <% }) %>
+</div>
