@@ -131,10 +131,9 @@ source/friends/index.md
 title: 友情链接
 layout: friends
 links:
-  - name: NightLab
-    url: https://nightlab.example/
-    desc: Web 安全、云原生攻防与漏洞复现。
-    tag: Web
+  - name: g0ubu1i's Blog
+    url: https://blog.goubuli.online
+    desc: CTF学习笔记
 ---
 ```
 
